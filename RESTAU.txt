@@ -1,0 +1,86 @@
+from os import system, name
+from cgi import print_directory
+import time
+#Nettoyer l'écran
+def clear(): 
+  
+    
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    
+    else: 
+        _ = system('clear') 
+
+#MESSAGE DE BIEN VENUR
+def wellcome(temporisation,effacer,temps = 0):
+    bienvenu_message ="BIENVENUE CHEZ K'BORIS RESTAURANT FOOD"
+    bv_m=""
+    es=" "
+    l= len(bienvenu_message)
+    
+    for i in bienvenu_message:
+        espace=es*l
+        bv_m= bv_m + i
+        if effacer == 1:
+                clear()
+        if temporisation ==1:
+            print("""+==========================================================+
+|          {}{}         |
++==========================================================+
+                """.format(bv_m,espace))
+            time.sleep(0.05)
+        l-=1
+    if temporisation !=1:
+        print("""+==========================================================+
+|          {}{}         |
++==========================================================+
+                """.format(bv_m,espace))
+        time.sleep(temps)
+
+#Fin message de binevenue
+
+
+
+def afficher_titre(titre,CARACTERE_TITRE,sens,mouvement):
+    TAILLE_ECRAN = 60
+    taille_titre = len(titre)
+    aff1=aff2= ""
+    taille_reste_ecran = TAILLE_ECRAN - len(titre) -2
+    if taille_titre%2 == 0:
+        aff1 = CARACTERE_TITRE*(taille_reste_ecran//2)
+        aff2 = aff1
+    else:
+        aff1 =CARACTERE_TITRE*(taille_reste_ecran//2)
+        aff2 = CARACTERE_TITRE*(taille_reste_ecran//2 + 1)
+    menu1 = "{} {} {}".format(aff1,titre,aff2)
+
+
+#Si gauchre vers la droite
+    if sens == 1:
+        es=""
+    if sens == 0:
+        es=" "
+    l=len(menu1)-1
+    menu2 = ""
+    for i in range(0,len(menu1)):
+        espace = es*l
+        menu2 = menu1[l]+menu2
+        #affichage statique ou dynamique
+        if mouvement ==1:
+            clear()
+            wellcome(0,0,0)
+            print("{}{}".format(espace,menu2))
+            time.sleep(0.05)
+        l-=1
+    if mouvement == 0:
+        print("{}{}".format(espace,menu2))
+
+
+
+
+
+
+wellcome(1,1,1)
+afficher_titre("MENU","*",0,1)
+afficher_titre("Plats principaux","+",0,0)
